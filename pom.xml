@@ -26,6 +26,7 @@
         </extensions>
     </build>
 
+<!--    PACKAGECLOUD-->
     <distributionManagement>
         <repository>
             <id>packagecloud.release</id>
