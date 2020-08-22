@@ -6,7 +6,7 @@
 
     <groupId>guru.springframework</groupId>
     <artifactId>mb2g-testing</artifactId>
-    <version>1.1.SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -16,25 +16,33 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>
 
-    <build>
-        <extensions>
-            <extension>
-                <groupId>io.packagecloud.maven.wagon</groupId>
-                <artifactId>maven-packagecloud-wagon</artifactId>
-                <version>0.0.6</version>
-            </extension>
-        </extensions>
-    </build>
-
-<!--    PACKAGECLOUD-->
-    <distributionManagement>
+<!--    PULL-->
+    <repositories>
         <repository>
-            <id>packagecloud.release</id>
-            <url>packagecloud+https://packagecloud.io/FrankiPanki/release</url>
+            <id>nexus-snapshot</id>
+            <url>http://localhost:8081/repository/nexus-snapshot/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
+        <repository>
+            <id>nexus-release</id>
+            <url>http://localhost:8081/repository/nexus-snapshot/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+<!--    PUSH-->
+    <distributionManagement>
         <snapshotRepository>
-            <id>packagecloud.snapshots</id>
-            <url>packagecloud+https://packagecloud.io/FrankiPanki/snapshot</url>
+            <id>nexus-snapshot</id>
+            <url>http://localhost:8081/repository/nexus-snapshot/</url>
         </snapshotRepository>
+        <repository>
+            <id>nexus-release</id>
+            <url>http://localhost:8081/repository/nexus-release/</url>
+        </repository>
     </distributionManagement>
 </project>
