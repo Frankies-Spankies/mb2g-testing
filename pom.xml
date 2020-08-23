@@ -6,7 +6,7 @@
 
     <groupId>guru.springframework</groupId>
     <artifactId>mb2g-testing</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.3-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,9 +26,44 @@
         </extensions>
     </build>
 
-    <!--    PACKAGECLOUD-->
 
     <profiles>
+        <profile>
+            <id>nexus_distro</id>
+            <!--    PULL-->
+<!--            AQUI SE DEJA EL PULL POR QUE NO SE HA CONFIGURADO UN MIRROR CON NEXUS PARA AGREGAR MAVEN CENTRAL-->
+<!--            MEDIANTE UN REPOSITORY GROUP-->
+            <repositories>
+                <repository>
+                    <id>nexus-snapshot</id>
+                    <url>http://localhost:8081/repository/nexus-snapshot/</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>nexus-release</id>
+                    <url>http://localhost:8081/repository/nexus-snapshot/</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+
+            <!--    PUSH-->
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>nexus-snapshot</id>
+                    <url>http://localhost:8081/repository/nexus-snapshot/</url>
+                </snapshotRepository>
+                <repository>
+                    <id>nexus-release</id>
+                    <url>http://localhost:8081/repository/nexus-release/</url>
+                </repository>
+            </distributionManagement>
+
+
+        </profile>
         <profile>
             <id>packagecloud</id>
             <activation>
